@@ -1,3 +1,4 @@
+// this is a test
 fn hash(code: &str) -> String {
     let mut pass_list: Vec<u32> = Vec::new();
     let mut pre_list: Vec<u32> = Vec::new();
@@ -26,28 +27,35 @@ fn hash(code: &str) -> String {
         .map(|i| i.to_string())
         .collect::<String>();
 
-    println!("{incode}");
     incode
 }
 
-fn check(pass: String, compar_pass: String) {
-    let mut compar_list: Vec<u32> = Vec::new();
-    for i in compar_pass.chars() {
-        compar_list.push(i.to_digit(10).unwrap());
-    }
+fn check(pass: String, compar_pass: String) -> bool {
+    let mut stat: bool = false;
 
-    for i in 0..4 {
-        if compar_list[i] == 0 {
-            println!("{:?}", true);
+    for (i, c) in compar_pass.chars().enumerate() {
+        if c == '0' {
+            if compar_pass == pass {
+                println!("Accses granted");
+                stat = true;
+                break;
+            }
         } else {
-            println!("{:?}", false)
+            if i == 3 {
+                println!("Invaled Pascode");
+                stat = false;
+                break;
+            }
         }
     }
+
+    println!("{:?}", stat);
+    stat
 }
 
 fn main() {
-    let mut passcode = "01231234";
-    let mut user_enter = "10231234";
+    let mut passcode = "10231234";
+    let mut user_enter = "10231235";
 
     check(hash(passcode), hash(user_enter));
 }
