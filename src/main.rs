@@ -1,4 +1,17 @@
-// this is a test
+use std::io;
+
+struct Passcode {
+    length: u32,
+    value: str,
+}
+
+impl Passcode {
+    fn hash(&self) {
+        let split = &self.value[4..];
+        for _i in split.chars() {}
+    }
+}
+
 fn hash(code: &str) -> String {
     let mut pass_list: Vec<u32> = Vec::new();
     let mut pre_list: Vec<u32> = Vec::new();
@@ -29,6 +42,7 @@ fn hash(code: &str) -> String {
 
     incode
 }
+const i: u32 = 1;
 
 fn check(pass: String, compar_pass: String) -> bool {
     let compar_str: &str = &compar_pass[4..];
@@ -55,9 +69,16 @@ fn check(pass: String, compar_pass: String) -> bool {
 
 fn main() {
     let passcode = "00001234";
-    let user_enter = "10231234";
+    let enter_pass = "10231234";
+    // println!("Enter the passcode");
+    //
+    // let mut enter_pass = String::new();
+    //
+    // io::stdin()
+    //     .read_line(&mut enter_pass)
+    //     .expect("Failed to read line");
 
-    if check(hash(passcode), hash(user_enter)) {
+    if check(hash(&passcode), hash(&enter_pass)) {
         println!("Access Granted")
     } else {
         println!("Acccess Denied")
